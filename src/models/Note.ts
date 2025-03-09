@@ -2,8 +2,10 @@ import mongoose, { Schema, Document } from "mongoose";
 
 // Define TypeScript interface for a note
 export interface INote extends Document {
-  title: string;
-  content: string;
+    title: string;
+    content: string;
+    createdAt: Date;
+    updatedAt: Date;
 }
 
 export interface INoteModel extends INote, Document {}
@@ -14,7 +16,7 @@ const NoteSchema: Schema = new Schema(
         content: { type: String, required: true }
     },
     {
-        versionKey: false
+        versionKey: false, timestamps: true
     }
 );
 
