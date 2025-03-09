@@ -1,6 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
 import mongoose from 'mongoose';
-import Author from '../models/Note';
 import Note from '../models/Note';
 
 const createNote = (req: Request, res: Response, next: NextFunction): Promise<any>  => {
@@ -37,7 +36,7 @@ const readAll = (req: Request, res: Response, next: NextFunction): Promise<any> 
 const deleteNote = (req: Request, res: Response, next: NextFunction): Promise<any> => {
     const noteId = req.params.noteId;
 
-    return Author.findByIdAndDelete(noteId)
+    return Note.findByIdAndDelete(noteId)
         .then((note) => (note ? res.status(201).json({ note, message: 'Deleted' }) : res.status(404).json({ message: 'not found' })))
         .catch((error) => res.status(500).json({ error }));
 };
