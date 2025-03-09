@@ -20,7 +20,7 @@ const createNote = (req: Request, res: Response, next: NextFunction): Promise<an
 };
 
 const readNote = (req: Request, res: Response, next: NextFunction): Promise<any>  => {
-    const noteId = req.params.authorId;
+    const noteId = req.params.noteId;
 
     return Note.findById(noteId)
         .then((note) => (note ? res.status(200).json({ note }) : res.status(404).json({ message: 'not found' })))
@@ -35,7 +35,7 @@ const readAll = (req: Request, res: Response, next: NextFunction): Promise<any> 
 
 
 const deleteNote = (req: Request, res: Response, next: NextFunction): Promise<any> => {
-    const noteId = req.params.authorId;
+    const noteId = req.params.noteId;
 
     return Author.findByIdAndDelete(noteId)
         .then((note) => (note ? res.status(201).json({ note, message: 'Deleted' }) : res.status(404).json({ message: 'not found' })))
