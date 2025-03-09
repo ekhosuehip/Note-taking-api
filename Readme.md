@@ -18,7 +18,7 @@ A simple RESTful API for creating, reading, and deleting notes using **Node.js, 
 ## Installation
 ### 1. Clone the repository
 ```bash
-git clone https://github.com/your-username/note-taking-api.git
+git clone https://github.com/ekhosuehip/note-taking-api.git
 cd note-taking-api
 ```
 
