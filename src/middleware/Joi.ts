@@ -1,6 +1,6 @@
 import Joi, { ObjectSchema } from 'joi';
 import { NextFunction, Request, Response } from 'express';
-import { INote } from '../models/Note';
+import Note, { INote } from '../models/Note';
 ;
 
 export const ValidateJoi = (schema: ObjectSchema) => {
@@ -18,7 +18,7 @@ export const ValidateJoi = (schema: ObjectSchema) => {
 };
 
 export const Schemas = {
-    author: {
+    note: {
         create: Joi.object<INote>({
             title: Joi.string().required(),
             content: Joi.string().required()
