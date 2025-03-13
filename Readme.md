@@ -46,17 +46,28 @@ npm run dev  # Uses nodemon for hot reloading
 ```json
 {
   "title": "Sample Note",
-  "content": "This is a sample note."
+  "content": "This is a sample note.",
+  "category": {
+    "name": "Test",
+    "description": "Notes just for testing the API."
+  }
 }
 ```
 #### Response:
 ```json
 {
-  "_id": "12345",
-  "title": "Sample Note",
-  "content": "This is a sample note.",
-  "createdAt": "2025-03-09T12:00:00.000Z",
-  "updatedAT": "2025-03-09T12:00:00.000Z"
+    "note": {
+        "title": "Sample Note",
+        "content": "This is a sample note.",
+        "category": {
+            "name": "Test",
+            "description": "Notes just for testing the API.",
+            "_id": "67d30078e8eeccfcec085ac2"
+        },
+        "_id": "67d30078e8eeccfcec085ac1",
+        "createdAt": "2025-03-13T15:57:44.132Z",
+        "updatedAt": "2025-03-13T15:57:44.132Z"
+    }
 }
 ```
 

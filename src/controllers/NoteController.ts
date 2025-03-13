@@ -4,6 +4,7 @@ import {noteSchema} from '../middleware/Joi'
 
 const createNote = async (req: Request, res: Response, next: NextFunction): Promise<any> => {
     try {
+        // Validating request
         const { error, value } = noteSchema.create.validate(req.body, { abortEarly: false }); // Extract from body
         
         if (error) {
