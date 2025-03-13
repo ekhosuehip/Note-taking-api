@@ -21,27 +21,73 @@ const createNote = async (req: Request, res: Response, next: NextFunction): Prom
 };
 
 
-const readNote = (req: Request, res: Response, next: NextFunction): Promise<any>  => {
+const readNote = async (req: Request, res: Response, next: NextFunction): Promise<any>  => {
     const noteId = req.params.noteId;
+    
+    try {
+        const note = await Note.findById(noteId);
 
-    return Note.findById(noteId)
-        .then((note) => (note ? res.status(200).json({ note }) : res.status(404).json({ message: 'not found' })))
-        .catch((error) => res.status(500).json({ error }));
+        // Check if note is found
+        if (!note) {
+            return res.status(404).json({ message: `Note with ID ${noteId} not found` });
+        }
+
+        return res.status(200).json({ note });
+
+    } catch (error) {
+        return res.status(500).json({ error: error || 'Internal Server Error' });
+    }
 };
 
-const readAll = (req: Request, res: Response, next: NextFunction): Promise<any>  => {
-    return Note.find()
-        .then((note) => res.status(200).json({ note }))
-        .catch((error) => res.status(500).json({ error }));
+
+const readAll = async (req: Request, res: Response, next: NextFunction): Promise<any>  => {
+    try {
+      const notes = await Note.find(); // Fetch all notes
+      if (notes.length > 0) { 
+        return res.status(200).json({ notes });
+      } else {
+        return res.status(404).json({ message: 'No notes found' });
+      }
+    } catch (error) {
+      return res.status(500).json({ error: error || 'Internal Server Error' });
+    }
+  };
+
+  const getByCategory = async (req: Request, res: Response, next: NextFunction): Promise<any> => {
+    const categoryId = req.params.categoryId;
+
+    try {
+        const notes = await Note.find({ 'category._id': categoryId });
+
+        // Check if notes are found
+        if (notes.length === 0) {
+            return res.status(404).json({ message: `No notes found for category ID ${categoryId}` });
+        }
+
+        return res.status(200).json({ notes });
+
+    } catch (error) {
+        return res.status(500).json({ error: error || 'Internal Server Error' });
+    }
 };
 
 
-const deleteNote = (req: Request, res: Response, next: NextFunction): Promise<any> => {
+
+const deleteNote = async (req: Request, res: Response, next: NextFunction): Promise<any> => {
     const noteId = req.params.noteId;
+  
+    try {
+      const note = await Note.findByIdAndDelete(noteId);
+  
+      // Check if the note exists, then return appropriate response
+      if (note) {
+        return res.status(200).json({ note, message: 'Deleted' });
+      } else {
+        return res.status(404).json({ message: 'Note not found' });
+      }
+    } catch (error) {
+      return res.status(500).json({ Error: error || 'Internal Server Error' });
+    }
+  };
 
-    return Note.findByIdAndDelete(noteId)
-        .then((note) => (note ? res.status(200).json({ note, message: 'Deleted' }) : res.status(404).json({ message: 'not found' })))
-        .catch((error) => res.status(500).json({ error }));
-};
-
-export default { createNote, readNote, readAll, deleteNote };
+export default { createNote, readNote, readAll,getByCategory, deleteNote };

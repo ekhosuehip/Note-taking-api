@@ -12,7 +12,7 @@ export function validateNote<T>(schema: ObjectSchema<T>) {
         return res.status(400).json({ error: error.details });
       }
 
-      req.body = value;  // Attach the validated body to the request
+      req.body = value; 
       next();
     } catch (err) {
       return res.status(500).json({ error: 'Internal Server Error' });
@@ -29,4 +29,7 @@ export const noteSchema = {
             description: Joi.string().allow("").optional()
         }).required()
     }),
+    delete: Joi.object<INote>({
+        id: Joi.string().required()
+    })
 };

@@ -7,6 +7,7 @@ const router = express.Router();
 
 router.get('/', controller.readAll);
 router.get('/:noteId', controller.readNote);
+router.get('/categories/:categoryId', controller.getByCategory);
 router.post('/',validateNote(noteSchema.create), controller.createNote);
 router.delete('/:noteId', controller.deleteNote);
 
