@@ -1,16 +1,8 @@
 import { NextFunction, Request, Response } from 'express';
 import {Note} from '../models/Note';
-import {noteSchema} from '../middleware/Joi'
 
 const createNote = async (req: Request, res: Response, next: NextFunction): Promise<any> => {
     try {
-        // Validating request
-        const { error, value } = noteSchema.create.validate(req.body, { abortEarly: false }); // Extract from body
-        
-        if (error) {
-            return res.status(400).json({ error: error.details });
-        }
-
         const { title, content, category } = req.body;
 
         // Create and save note
