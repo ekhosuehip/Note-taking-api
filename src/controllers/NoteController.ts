@@ -71,6 +71,24 @@ const readAll = async (req: Request, res: Response, next: NextFunction): Promise
     }
 };
 
+const updateNote = async (req: Request, res: Response, next: NextFunction): Promise<any> => {
+    const searchId = req.params.id
+    console.log(searchId)
+    const { title, content, category } = req.body;
+
+    try{
+        const note = await Note.findByIdAndUpdate(searchId, 
+            { title, content, category }, 
+            { new: true, runValidators: true });
+        if (!note) {
+            return res.status(404).json({ message: `No notes found with id ${searchId}` });
+        }
+        return res.status(201).json({"Note updated": note });
+    }catch(err){
+        return res.status(500).json({ error: err || 'Internal Server Error' });
+    }
+}
+
 
 
 const deleteNote = async (req: Request, res: Response, next: NextFunction): Promise<any> => {
@@ -90,4 +108,4 @@ const deleteNote = async (req: Request, res: Response, next: NextFunction): Prom
     }
   };
 
-export default { createNote, readNote, readAll,getByCategory, deleteNote };
+export default { createNote, readNote, readAll, getByCategory, updateNote, deleteNote };

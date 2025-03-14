@@ -8,7 +8,8 @@ const router = express.Router();
 router.get('/', controller.readAll);
 router.get('/:noteId', controller.readNote);
 router.get('/categories/:categoryId', controller.getByCategory);
-router.post('/',validateNote(noteSchema.create), controller.createNote);
+router.post('/',validateNote(noteSchema.note), controller.createNote);
+router.put('/:id',validateNote(noteSchema.note), controller.updateNote);
 router.delete('/:noteId', controller.deleteNote);
 
 export default router

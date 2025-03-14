@@ -21,15 +21,12 @@ export function validateNote<T>(schema: ObjectSchema<T>) {
 }
 
 export const noteSchema = {
-    create: Joi.object<INote>({
+    note: Joi.object<INote>({
         title: Joi.string().required(),
         content: Joi.string().required(),
         category: Joi.object({
             name: Joi.string().required(),
             description: Joi.string().allow("").optional()
         }).required()
-    }),
-    delete: Joi.object<INote>({
-        id: Joi.string().required()
     })
 };
