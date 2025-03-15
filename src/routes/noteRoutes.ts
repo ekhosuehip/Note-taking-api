@@ -1,6 +1,7 @@
 import express from 'express';
 import controller from "../controllers/NoteController";
-import{validateNote, noteSchema} from '../middleware/Joi'
+import{validateNote} from '../middleware/Joi';
+import {noteSchema} from '../schema/joiSchema'
 
 const router = express.Router();
 

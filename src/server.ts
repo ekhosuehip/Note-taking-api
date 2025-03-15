@@ -2,7 +2,7 @@ import express from 'express';
 import cors from "cors";
 import mongoose from 'mongoose';
 import { config } from './config/config';
-import { string } from 'joi';
+import loggerMiddleware from './middleware/loggingMiddleware'
 import noteRoutes from './routes/noteRoutes'
 
 const app = express();
@@ -16,7 +16,8 @@ mongoose.connect(config.mongo.url as string)
 // Middleware
 app.use(cors());
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: false }));
+app.use(loggerMiddleware);
 
 // Routes
 app.use("/api/note", noteRoutes);

@@ -72,8 +72,7 @@ const readAll = async (req: Request, res: Response, next: NextFunction): Promise
 };
 
 const updateNote = async (req: Request, res: Response, next: NextFunction): Promise<any> => {
-    const searchId = req.params.id
-    console.log(searchId)
+    const searchId = req.params.id;
     const { title, content, category } = req.body;
 
     try{
