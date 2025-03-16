@@ -22,6 +22,11 @@ app.use(loggerMiddleware);
 // Routes
 app.use("/api/note", noteRoutes);
 
+// 404 Handler (should be at the bottom)
+app.use((req, res) => {
+  res.status(404).json({ error: 'Route not found' });
+});
+
 // Server check
 app.use("/api/ping", (req, res) => {res.status(200).json({message: 'pong'})})
 
