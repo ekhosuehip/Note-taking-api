@@ -20,22 +20,17 @@ app.use(express.urlencoded({ extended: false }));
 app.use(loggerMiddleware);
 
 // Routes
-app.use("/api/note", noteRoutes);
+app.use("/api/notes", noteRoutes);
 
-// 404 Handler (should be at the bottom)
-app.use((req, res) => {
-  res.status(404).json({ error: 'Route not found' });
-});
 
 // Server check
 app.use("/api/ping", (req, res) => {res.status(200).json({message: 'pong'})})
 
-// Error handling
-app.use((req, res, next) => {
-  const error = new Error("not found");
-  console.log(error);
-  res.status(404).json({message: error.message});
-})
+// 404 Handler 
+app.use((req, res) => {
+  res.status(404).json({ error: 'Route not found' });
+});
+
 
 
 // Start Server
