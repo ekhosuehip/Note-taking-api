@@ -1,24 +1,28 @@
 # Note-Taking API
 
-A simple RESTful API for creating, reading, updating, and deleting notes using **Node.js, Express, TypeScript, and MongoDB**.
+A simple API to create, read, update, and delete notes using **Node.js, Express, TypeScript, and MongoDB**.
+
+## Deployment
+The API is live and can be accessed here:
+🔗 [Note-Taking API](https://note-taking-api-sri7.onrender.com/api/notes)
 
 ## Features
-- Create a new note
-- Retrieve all notes
-- Retrieve notes by category ID
-- Retrieve a single note by ID
+- Add a new note
+- Get all notes
+- Get notes by category
+- Get a single note by ID
 - Update a note by ID
 - Delete a note by ID
 
 ## Technologies Used
-- **Node.js**
-- **Express.js**
-- **TypeScript**
-- **MongoDB** (with Mongoose ODM)
-- **Nodemon** (for development)
+- **Node.js** – Server-side runtime
+- **Express.js** – Web framework
+- **TypeScript** – JavaScript with types
+- **MongoDB** – NoSQL database
+- **Nodemon** – Auto-reload during development
 
 ## Installation
-### 1. Clone the repository
+### 1. Clone the repo
 ```bash
 git clone https://github.com/ekhosuehip/note-taking-api.git
 cd note-taking-api
@@ -29,8 +33,8 @@ cd note-taking-api
 npm install
 ```
 
-### 3. Configure environment variables
-Create a `.env` file in the root directory and add the following:
+### 3. Setup environment variables
+Create a `.env` file in the root directory and add this:
 ```env
 PORT=3000
 MONGO_URI=your_mongodb_connection_string
@@ -38,13 +42,15 @@ MONGO_URI=your_mongodb_connection_string
 
 ### 4. Start the server
 ```bash
-npm run start  # Uses nodemon for hot reloading
+npm run start  # Uses nodemon for auto-reload
 ```
 
 ## API Endpoints
+
 ### 1. Create a Note
 **POST** `/api/notes`
-#### Request Body (JSON):
+
+#### Example Request Body:
 ```json
 {
   "title": "Sample Note",
@@ -55,37 +61,39 @@ npm run start  # Uses nodemon for hot reloading
   }
 }
 ```
-#### Response:
+
+#### Example Response:
 ```json
 {
-    "note": {
-        "title": "Sample Note",
-        "content": "This is a sample note.",
-        "category": {
-            "name": "Test",
-            "description": "Notes just for testing the API.",
-            "_id": "67d30078e8eeccfcec085ac2"
-        },
-        "_id": "67d30078e8eeccfcec085ac1",
-        "createdAt": "2025-03-13T15:57:44.132Z",
-        "updatedAt": "2025-03-13T15:57:44.132Z"
-    }
+  "note": {
+    "title": "Sample Note",
+    "content": "This is a sample note.",
+    "category": {
+      "name": "Test",
+      "description": "Notes just for testing the API.",
+      "_id": "67d30078e8eeccfcec085ac2"
+    },
+    "_id": "67d30078e8eeccfcec085ac1",
+    "createdAt": "2025-03-13T15:57:44.132Z",
+    "updatedAt": "2025-03-13T15:57:44.132Z"
+  }
 }
 ```
 
 ### 2. Get All Notes
 **GET** `/api/notes`
-#### Response:
+
+#### Example Response:
 ```json
 [
   {
     "_id": "67d49ea2e85e2ef383c744c0",
     "title": "Meeting Summary",
-    "content": "Reviewed project milestones and upcoming deadlines.",
+    "content": "Reviewed project milestones.",
     "category": {
-        "name": "Work",
-        "description": "Notes from team meetings and discussions today.",
-        "_id": "67d49fbce85e2ef383c744ce"
+      "name": "Work",
+      "description": "Notes from team meetings.",
+      "_id": "67d49fbce85e2ef383c744ce"
     },
     "createdAt": "2025-03-14T21:24:50.381Z",
     "updatedAt": "2025-03-14T21:29:32.898Z"
@@ -95,17 +103,18 @@ npm run start  # Uses nodemon for hot reloading
 
 ### 3. Get Notes by Category ID
 **GET** `/api/notes/categories/:categoryId`
-#### Response:
+
+#### Example Response:
 ```json
 [
   {
     "_id": "67d49ea2e85e2ef383c744c0",
     "title": "Meeting Summary",
-    "content": "Reviewed project milestones and upcoming deadlines.",
+    "content": "Reviewed project milestones.",
     "category": {
-        "name": "Work",
-        "description": "Notes from team meetings and discussions today.",
-        "_id": "67d49fbce85e2ef383c744ce"
+      "name": "Work",
+      "description": "Notes from team meetings.",
+      "_id": "67d49fbce85e2ef383c744ce"
     },
     "createdAt": "2025-03-14T21:24:50.381Z",
     "updatedAt": "2025-03-14T21:29:32.898Z"
@@ -115,16 +124,17 @@ npm run start  # Uses nodemon for hot reloading
 
 ### 4. Get a Single Note
 **GET** `/api/notes/:id`
-#### Response:
+
+#### Example Response:
 ```json
 {
   "_id": "67d49ea2e85e2ef383c744c0",
   "title": "Meeting Summary",
-  "content": "Reviewed project milestones and upcoming deadlines.",
+  "content": "Reviewed project milestones.",
   "category": {
-      "name": "Work",
-      "description": "Notes from team meetings and discussions today.",
-      "_id": "67d49fbce85e2ef383c744ce"
+    "name": "Work",
+    "description": "Notes from team meetings.",
+    "_id": "67d49fbce85e2ef383c744ce"
   },
   "createdAt": "2025-03-14T21:24:50.381Z",
   "updatedAt": "2025-03-14T21:29:32.898Z"
@@ -133,7 +143,8 @@ npm run start  # Uses nodemon for hot reloading
 
 ### 5. Update a Note
 **PUT** `/api/notes/:id`
-#### Request Body (JSON):
+
+#### Example Request Body:
 ```json
 {
   "title": "Updated Note Title",
@@ -144,7 +155,8 @@ npm run start  # Uses nodemon for hot reloading
   }
 }
 ```
-#### Response:
+
+#### Example Response:
 ```json
 {
   "note": {
@@ -164,27 +176,28 @@ npm run start  # Uses nodemon for hot reloading
 
 ### 6. Delete a Note
 **DELETE** `/api/notes/:id`
-#### Response:
+
+#### Example Response:
 ```json
 {
   "note": {
-      "_id": "67d2e6ea4d07fd7b7e8d9dbd",
-      "title": "lorem lpsum 6",
-      "content": "Lorem ipsum dolor sit amet, consectetur ",
-      "category": {
-          "name": "Work",
-          "description": "Notes related to work meetings",
-          "_id": "67d2e6ea4d07fd7b7e8d9dbe"
-      },
-      "createdAt": "2025-03-13T14:08:42.787Z",
-      "updatedAt": "2025-03-13T14:08:42.787Z"
+    "_id": "67d2e6ea4d07fd7b7e8d9dbd",
+    "title": "Lorem Ipsum",
+    "content": "Lorem ipsum dolor sit amet.",
+    "category": {
+      "name": "Work",
+      "description": "Notes related to work meetings.",
+      "_id": "67d2e6ea4d07fd7b7e8d9dbe"
+    },
+    "createdAt": "2025-03-13T14:08:42.787Z",
+    "updatedAt": "2025-03-13T14:08:42.787Z"
   },
   "message": "Deleted"
 }
 ```
 
 ## Contributing
-1. Fork the repository.
+1. Fork the repo.
 2. Create a new branch (`feature-branch`).
 3. Commit your changes.
 4. Push to your branch and open a pull request.
@@ -196,3 +209,6 @@ This project is open-source and available under the [MIT License](LICENSE).
 
 ### 🚀 Happy Coding! 🎉
 
+--- 
+
+Let me know if you want to add more details or features!
