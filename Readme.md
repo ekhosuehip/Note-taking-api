@@ -36,7 +36,7 @@ MONGO_URI=your_mongodb_connection_string
 
 ### 4. Start the server
 ```bash
-npm run dev  # Uses nodemon for hot reloading
+npm run start  # Uses nodemon for hot reloading
 ```
 
 ## API Endpoints
@@ -77,11 +77,16 @@ npm run dev  # Uses nodemon for hot reloading
 ```json
 [
   {
-    "_id": "12345",
-    "title": "Sample Note",
-    "content": "This is a sample note.",
-    "createdAt": "2025-03-09T12:00:00.000Z",
-    "updatedAt": "2025-03-09T12:00:00.000Z"
+    "_id": "67d49ea2e85e2ef383c744c0",
+    "title": "Meeting Summary",
+    "content": "Reviewed project milestones and upcoming deadlines.",
+    "category": {
+        "name": "Work",
+        "description": "Notes from team meetings and discussions today.",
+        "_id": "67d49fbce85e2ef383c744ce"
+    },
+    "createdAt": "2025-03-14T21:24:50.381Z",
+    "updatedAt": "2025-03-14T21:29:32.898Z"
   }
 ]
 ```
@@ -91,11 +96,16 @@ npm run dev  # Uses nodemon for hot reloading
 #### Response:
 ```json
 {
-  "_id": "12345",
-  "title": "Sample Note",
-  "content": "This is a sample note.",
-  "createdAt": "2025-03-09T12:00:00.000Z",
-  "updatedAt": "2025-03-09T12:00:00.000Z"
+  "_id": "67d49ea2e85e2ef383c744c0",
+  "title": "Meeting Summary",
+  "content": "Reviewed project milestones and upcoming deadlines.",
+  "category": {
+      "name": "Work",
+      "description": "Notes from team meetings and discussions today.",
+      "_id": "67d49fbce85e2ef383c744ce"
+  },
+  "createdAt": "2025-03-14T21:24:50.381Z",
+  "updatedAt": "2025-03-14T21:29:32.898Z"
 }
 ```
 
@@ -104,7 +114,19 @@ npm run dev  # Uses nodemon for hot reloading
 #### Response:
 ```json
 {
-  "message": "Note deleted successfully"
+  "note": {
+      "_id": "67d2e6ea4d07fd7b7e8d9dbd",
+      "title": "lorem lpsum 6",
+      "content": "Lorem ipsum dolor sit amet, consectetur ",
+      "category": {
+          "name": "Work",
+          "description": "Notes related to work meetings",
+          "_id": "67d2e6ea4d07fd7b7e8d9dbe"
+      },
+      "createdAt": "2025-03-13T14:08:42.787Z",
+      "updatedAt": "2025-03-13T14:08:42.787Z"
+  },
+  "message": "Deleted"
 }
 ```
 
@@ -112,20 +134,26 @@ npm run dev  # Uses nodemon for hot reloading
 ```
 project/
 │── src/
+│   ├── config/
+│   │   ├── config.ts
 │   ├── controllers/
 │   │   ├── NoteController.ts
+│   ├── middleware/
+│   │   ├── Joi.ts
+│   │   ├── loggingMiddleware.ts
 │   ├── models/
 │   │   ├── Note.ts
 │   ├── routes/
 │   │   ├── noteRoutes.ts
-│   ├── config/
-│   │   ├── db.ts
-│   ├── middleware/
+│   ├── schema/
+│   │   ├── joiSchema.ts
 │   ├── server.ts
-│── package.json
-│── tsconfig.json
 │── .env
+│── .gitignore
+│── package-lock.json
+│── package.json
 │── README.md
+│── tsconfig.json
 ```
 
 ## Contributing
