@@ -1,11 +1,13 @@
 # Note-Taking API
 
-A simple RESTful API for creating, reading, and deleting notes using **Node.js, Express, TypeScript, and MongoDB**.
+A simple RESTful API for creating, reading, updating, and deleting notes using **Node.js, Express, TypeScript, and MongoDB**.
 
 ## Features
 - Create a new note
 - Retrieve all notes
+- Retrieve notes by category ID
 - Retrieve a single note by ID
+- Update a note by ID
 - Delete a note by ID
 
 ## Technologies Used
@@ -91,7 +93,27 @@ npm run start  # Uses nodemon for hot reloading
 ]
 ```
 
-### 3. Get a Single Note
+### 3. Get Notes by Category ID
+**GET** `/api/notes/categories/:categoryId`
+#### Response:
+```json
+[
+  {
+    "_id": "67d49ea2e85e2ef383c744c0",
+    "title": "Meeting Summary",
+    "content": "Reviewed project milestones and upcoming deadlines.",
+    "category": {
+        "name": "Work",
+        "description": "Notes from team meetings and discussions today.",
+        "_id": "67d49fbce85e2ef383c744ce"
+    },
+    "createdAt": "2025-03-14T21:24:50.381Z",
+    "updatedAt": "2025-03-14T21:29:32.898Z"
+  }
+]
+```
+
+### 4. Get a Single Note
 **GET** `/api/notes/:id`
 #### Response:
 ```json
@@ -109,7 +131,38 @@ npm run start  # Uses nodemon for hot reloading
 }
 ```
 
-### 4. Delete a Note
+### 5. Update a Note
+**PUT** `/api/notes/:id`
+#### Request Body (JSON):
+```json
+{
+  "title": "Updated Note Title",
+  "content": "Updated content of the note.",
+  "category": {
+    "name": "Updated Category",
+    "description": "Updated category description."
+  }
+}
+```
+#### Response:
+```json
+{
+  "note": {
+    "_id": "67d49ea2e85e2ef383c744c0",
+    "title": "Updated Note Title",
+    "content": "Updated content of the note.",
+    "category": {
+      "name": "Updated Category",
+      "description": "Updated category description.",
+      "_id": "67d49fbce85e2ef383c744ce"
+    },
+    "createdAt": "2025-03-14T21:24:50.381Z",
+    "updatedAt": "2025-03-14T21:45:00.000Z"
+  }
+}
+```
+
+### 6. Delete a Note
 **DELETE** `/api/notes/:id`
 #### Response:
 ```json
@@ -128,32 +181,6 @@ npm run start  # Uses nodemon for hot reloading
   },
   "message": "Deleted"
 }
-```
-
-## Project Structure
-```
-project/
-│── src/
-│   ├── config/
-│   │   ├── config.ts
-│   ├── controllers/
-│   │   ├── NoteController.ts
-│   ├── middleware/
-│   │   ├── Joi.ts
-│   │   ├── loggingMiddleware.ts
-│   ├── models/
-│   │   ├── Note.ts
-│   ├── routes/
-│   │   ├── noteRoutes.ts
-│   ├── schema/
-│   │   ├── joiSchema.ts
-│   ├── server.ts
-│── .env
-│── .gitignore
-│── package-lock.json
-│── package.json
-│── README.md
-│── tsconfig.json
 ```
 
 ## Contributing
