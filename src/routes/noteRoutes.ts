@@ -1,5 +1,4 @@
 import express from 'express';
-// import controller from "../controllers/NoteController";
 import{validateNote} from '../middleware/Joi';
 import {noteSchema} from '../schema/joiSchema'
 import noteController from '../controllers/NoteController';

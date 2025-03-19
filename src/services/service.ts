@@ -25,7 +25,6 @@ class NoteService {
     async getNoteByCategoryId(id: string): Promise<INote[] | null> {
         return await Note.find({ 'category._id': id });
     }
-    
 
     // Delete note
     async deleteNote(id: string): Promise<INote | null> {
