@@ -42,4 +42,3 @@ const NoteSchema: Schema = new Schema(
 
 // Export Mongoose models
 export const Note = mongoose.model<INoteModel>("Note", NoteSchema);
-export const Category = mongoose.model<ICategory>("Category", CategorySchema);
